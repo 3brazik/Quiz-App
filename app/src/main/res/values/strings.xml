@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Quizz app</string>
+    <string name="quiz_title">Quiz Title</string>
+    <string name="todo">TODO</string>
+    <string name="quiz_description">Quiz Description</string>
+    <string name="diffuclty">Diffuclty</string>
+    <string name="total_question">Total Question</string>
+    <string name="your_last_question">Your last Question</string>
+    <string name="naDiff">NA</string>
+    <string name="naTotal">NA</string>
+    <string name="naLast">NA</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="na" />
+
+</resources>
