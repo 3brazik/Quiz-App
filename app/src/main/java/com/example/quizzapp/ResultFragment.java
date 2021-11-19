@@ -1,6 +1,5 @@
 package com.example.quizzapp;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -89,7 +88,6 @@ public class ResultFragment extends Fragment {
         //get result
          firebaseFirestore.collection("QuizList").document(quizId).collection("Result").document(currentUserId)
                  .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-             @SuppressLint("SetTextI18n")
              @Override
              public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                  if (task.isSuccessful()){
@@ -97,9 +95,9 @@ public class ResultFragment extends Fragment {
                      Long correct=result.getLong("correct");
                      Long wrong=result.getLong("wrong");
                      Long missed=result.getLong("unAnswered");
-                     resultCorrect.setText(correct != null ? correct.toString() : null);
-                     resultWrong.setText(wrong !=null? wrong.toString() :null);
-                     resultMissed.setText(missed != null ? missed.toString() : null);
+                     resultCorrect.setText(correct.toString());
+                     resultWrong.setText(wrong.toString());
+                     resultMissed.setText(missed.toString());
 
                      //Calculate progress
                      Long total=correct + missed + wrong;
