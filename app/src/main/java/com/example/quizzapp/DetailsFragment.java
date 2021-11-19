@@ -69,8 +69,7 @@ public class DetailsFragment extends Fragment implements View.OnClickListener {
         detailsQues=view.findViewById(R.id.details_questions);
         detailsButton=view.findViewById(R.id.details_start_btn);
 
-
-        detailsButton.setOnClickListener(this);
+detailsButton.setOnClickListener(this);
     }
 
     @Override

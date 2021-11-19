@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/circular_progress.xml" value="0.4" />
+        <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/correct_answer_btn.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/dark_bg.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/dsfffdgf.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
@@ -16,11 +18,12 @@
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/list_btnn.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/outline_btn_light_bg.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/primary_btn_bg.xml" value="0.2703125" />
+        <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/drawable/worng_answer_btn.xml" value="0.2703125" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_details.xml" value="0.264" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_list.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_quiz.xml" value="0.264" />
-        <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_result.xml" value="0.2391304347826087" />
+        <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_result.xml" value="0.2" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/fragment_start.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/layout/single_list_item.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/dark_/AndroidStudioProjects/Quizzapp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22037037037037038" />

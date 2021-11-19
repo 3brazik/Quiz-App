@@ -56,13 +56,20 @@
         tools:layout="@layout/fragment_quiz">
         <action
             android:id="@+id/action_quizFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:popUpTo="@id/quizFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="quizId"
+            android:defaultValue="null"
+            app:argType="string" />
         <argument
             android:name="total_questions"
             android:defaultValue="0L"
             app:argType="long" />
         <argument
-            android:name="quizId"
+            android:name="quizName"
             app:argType="string"
             android:defaultValue="null" />
     </fragment>
@@ -70,5 +77,17 @@
         android:id="@+id/resultFragment"
         android:name="com.example.quizzapp.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="quizId"
+            app:argType="string"
+            android:defaultValue="null" />
+        <action
+            android:id="@+id/action_resultFragment_to_listFragment"
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/resultFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

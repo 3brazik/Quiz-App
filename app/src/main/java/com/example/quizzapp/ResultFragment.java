@@ -1,64 +1,119 @@
 package com.example.quizzapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+
 public class ResultFragment extends Fragment {
+    private NavController navController;
+    private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth firebaseAuth;
+    private String quizId;
+    private String currentUserId;
+    private TextView resultCorrect;
+    private TextView resultWrong;
+    private TextView resultMissed;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextView resultPercent;
+    private ProgressBar resultProgress;
+    private Button resultHomeBtn;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ResultFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ResultFragment newInstance(String param1, String param2) {
-        ResultFragment fragment = new ResultFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_result, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        firebaseFirestore=FirebaseFirestore.getInstance();
+        navController = Navigation.findNavController(view);
+        firebaseAuth = FirebaseAuth.getInstance();
+        //get User id
+        if (firebaseAuth.getCurrentUser() != null) {
+             currentUserId = firebaseAuth.getCurrentUser().getUid();
+        } else {
+
+            //Go To Home Page
+        }
+        quizId=ResultFragmentArgs.fromBundle(getArguments()).getQuizId();
+        //initialize UI Elements
+        resultCorrect=view.findViewById(R.id.result_correct_text);
+        resultWrong=view.findViewById(R.id.result_wrong_text);
+        resultMissed=view.findViewById(R.id.result_missed_text);
+        resultHomeBtn=view.findViewById(R.id.result_home_btn);
+        resultProgress=view.findViewById(R.id.result_progress);
+        resultPercent=view.findViewById(R.id.result_percent);
+
+        resultHomeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_resultFragment_to_listFragment);
+            }
+        });
+
+        //get result
+         firebaseFirestore.collection("QuizList").document(quizId).collection("Result").document(currentUserId)
+                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+             @SuppressLint("SetTextI18n")
+             @Override
+             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                 if (task.isSuccessful()){
+                     DocumentSnapshot result=task.getResult();
+                     Long correct=result.getLong("correct");
+                     Long wrong=result.getLong("wrong");
+                     Long missed=result.getLong("unAnswered");
+                     resultCorrect.setText(correct != null ? correct.toString() : null);
+                     resultWrong.setText(wrong !=null? wrong.toString() :null);
+                     resultMissed.setText(missed != null ? missed.toString() : null);
+
+                     //Calculate progress
+                     Long total=correct + missed + wrong;
+                     Long percent=(correct*100)/total;
+
+
+                     resultProgress.setProgress(percent.intValue());
+                     resultPercent.setText(percent +"%");
+
+                 }
+
+
+             }
+         });
+
     }
 }
